@@ -1,9 +1,12 @@
 #include <Arduino.h>
 
-void setup() {
-  // put your setup code
+void setup() 
+{
+  Serial.begin(115200);
 }
 
-void loop() {
+void loop() 
+{
   // put your main code here, to run repeatedly:
+  Serial.print("Terminal série : test\r\n");
 }
