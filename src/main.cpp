@@ -1,8 +1,6 @@
 #include <main.h>
 #include <elabot.h>
 
-
-
 void setup() 
 {
   Serial.begin(115200);
