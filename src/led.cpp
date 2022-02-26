@@ -45,13 +45,13 @@ void Led::rgb_blink(unsigned long blink_time)
     
     if((current_millis - previous_millis) >= blink_time)
     {
-        Serial.print("Toogle led");
+        //Serial.print("Toogle led");
         previous_millis = millis();
 
         for (int i = 0; i < 4; i++)
         {
             if(led_state == true) leds[i] = 0x000000;
-            else leds[i] = CRGB::Tomato;
+            else leds[i] = 0x00FF0000;
         }
 
         FastLED.show();
@@ -62,3 +62,63 @@ void Led::rgb_blink(unsigned long blink_time)
     
 }
 
+void Led::rgb_set_color(char led, char R, char G, char B)
+{
+    uint32_t rgb = 0;
+    uint32_t temp = 0;
+    //Conversion % (int) -> 255 (char)
+    R = convert_pourcent_to_charvalue(R);
+    /*
+    Serial.print("char R :");
+    Serial.println(R, BIN);
+    */
+    rgb = R << 16;
+    /*
+    Serial.print("uint32 rgb :");
+    Serial.println(rgb, BIN);
+    Serial.println();
+    */
+    G = convert_pourcent_to_charvalue(G);
+    /*
+    Serial.print("char G : ");
+    Serial.println(G,BIN);
+    */
+    temp = G << 8;
+    /*
+    Serial.print("char temp : ");
+    Serial.println(temp, BIN);
+    */
+    rgb = rgb | temp;
+    /*
+    Serial.print("char rgb : ");
+    Serial.println(rgb, BIN);
+    Serial.println();
+    */
+    B = convert_pourcent_to_charvalue(B);
+    /*
+    Serial.print("char B :");
+    Serial.println(B, BIN);
+    */
+    temp = B;
+    rgb = rgb | temp;
+    /*
+    Serial.print("uint 32 rgb : ");
+    Serial.println(rgb,BIN);
+    */
+    if(led == LED_all)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            leds[i] = rgb;
+        }
+        
+    }
+    else leds[led] = rgb;
+
+    FastLED.show();
+}
+
+char convert_pourcent_to_charvalue(char value)
+{
+    return value = 255*value/100;
+}
