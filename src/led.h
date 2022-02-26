@@ -11,6 +11,7 @@
 #define LED_D12     1
 #define LED_D13     2
 #define LED_D14     3
+#define LED_all     4
 #define COLOR_ORDER GRB
 
 
@@ -29,8 +30,9 @@ class Led
         void led_on(int pin_led);
 
         void rgb_blink(unsigned long blink_time);
-        void rgb_set_color(char led, int R, int G, int B);
+        void rgb_set_color(char led, char R, char G, char B);
     
 };
 
+char convert_pourcent_to_charvalue(char value);
 #endif
