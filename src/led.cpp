@@ -1,15 +1,6 @@
 #include <main.h>
 #include <led.h>
 
-//Constructeur de la classe LED
-/*
-Led::Led(int pin_led)
-{
-    pinMode(pin_led, OUTPUT);
-    
-}
-*/
-
 bool led_state = false;
 unsigned long previous_millis = 0;
 unsigned long current_millis;
@@ -17,6 +8,7 @@ unsigned long current_millis;
 Led::Led()
 {
     FastLED.addLeds<WS2812B, DATA_PIN, COLOR_ORDER>(leds,NUM_LEDS);
+    pinMode(LED_BUILTIN, OUTPUT);
 }
 
 Led::Led(int pin_led)
