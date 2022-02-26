@@ -14,11 +14,6 @@ bool led_state = false;
 unsigned long previous_millis = 0;
 unsigned long current_millis;
 
-char led_d11 = 0x000000;
-char led_d12 = 0x000000;
-char led_d13 = 0x000000;
-char led_d14 = 0x000000;
-
 Led::Led()
 {
     FastLED.addLeds<WS2812B, DATA_PIN, COLOR_ORDER>(leds,NUM_LEDS);
