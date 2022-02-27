@@ -14,7 +14,6 @@
 #define LED_all     4
 #define COLOR_ORDER GRB
 
-
 class Led
 {
     private : 
