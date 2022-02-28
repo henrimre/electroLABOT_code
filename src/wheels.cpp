@@ -120,13 +120,17 @@ void attach_detach_PWM(char moteur, char vitesse_255, char attach)
             break;
         }
 
-
-    digitalWrite(enable_pin, HIGH);
-
     if(attach!=2)
     {
-    if(attach == 1) ledcAttachPin(moteur, attach_chanel);
-    else digitalWrite(attach_pin, LOW);
+    if(attach == 1) 
+    {
+        ledcAttachPin(moteur, attach_chanel);
+        digitalWrite(enable_pin, HIGH);
+    }
+    else {
+        digitalWrite(attach_pin, LOW);
+        digitalWrite(enable_pin, LOW);
+    }
 
     ledcDetachPin(detach_pin);
     digitalWrite(detach_pin, LOW);
@@ -135,10 +139,10 @@ void attach_detach_PWM(char moteur, char vitesse_255, char attach)
 
     else 
     {
+        digitalWrite(enable_pin, HIGH);
         Serial.println("attach == 2");
         ledcAttachPin(moteur, PWM_MOTOR1_CHANNEL);
         ledcWrite(PWM_MOTOR1_CHANNEL, vitesse_255);
-
     }
 
 }

@@ -25,13 +25,15 @@ Serial.println();
 Serial.println();
 Serial.println();
 
-billy.move(ALL_WHEELS_BACKWARD, 10);
+billy.move(ALL_WHEELS_FORWARD, 40);
 }
 
 void loop() 
 {
-  /*
+  
   delay(3000);
   billy.stop_move(ALL_WHEELS_FORWARD);
-*/
+  delay(3000);
+  billy.move(ALL_WHEELS_FORWARD, 40);
+
 }
