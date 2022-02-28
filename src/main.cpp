@@ -15,8 +15,6 @@ void setup()
   
   billy.rgb_set_color(LED_all, 30, 0, 15);
 
-  
-  
 }
 
 void loop() 
