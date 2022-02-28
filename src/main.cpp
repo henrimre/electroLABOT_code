@@ -27,13 +27,14 @@ void loop()
   Serial.println("move All wheels forward");
   delay(2000);
   billy.stop_move(ALL_WHEELS_FORWARD);
-  Serial.println("stop All wheels backward");
+  Serial.println("stop All wheels forward");
   delay(2000);
+  /*
   billy.move(ALL_WHEELS_BACKWARD, 50);
   Serial.println("move All wheel backward");
   delay(2000);
   billy.stop_move(ALL_WHEELS_BACKWARD);
   Serial.println("stop All wheel backward");
   delay(2000);
-
+*/
 }
