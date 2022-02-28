@@ -16,25 +16,17 @@ void setup()
   
   billy.rgb_set_color(LED_all, 30, 0, 15);
 
-  billy.move(ALL_WHEELS_FORWARD, 25);
-
+/*
+  billy.move(RIGHT_WHEELS_FORWARD, 50);
+  billy.move(LEFT_WHEELS_FORWARD, 80);
+*/
+billy.move(ALL_WHEELS_BACKWARD, 10);
 }
 
 void loop() 
 {
-
-  billy.move(ALL_WHEELS_FORWARD, 25);
-  Serial.println("move All wheels forward");
-  delay(2000);
-  billy.stop_move(ALL_WHEELS_FORWARD);
-  Serial.println("stop All wheels forward");
-  delay(2000);
   /*
-  billy.move(ALL_WHEELS_BACKWARD, 50);
-  Serial.println("move All wheel backward");
-  delay(2000);
-  billy.stop_move(ALL_WHEELS_BACKWARD);
-  Serial.println("stop All wheel backward");
-  delay(2000);
+  delay(3000);
+  billy.stop_move(ALL_WHEELS_FORWARD);
 */
 }

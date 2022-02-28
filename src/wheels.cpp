@@ -10,76 +10,129 @@ Wheels::Wheels()
     pinMode(LEFT_WHEELS_EN, OUTPUT);
     pinMode(LEFT_WHEELS_FORWARD, OUTPUT);
     pinMode(LEFT_WHEELS_BACKWARD, OUTPUT);
-    
+          
+    ledcSetup(PWM_MOTOR1_CHANNEL, PWM_MOTOR_FREQ, PWM_MOTOR_RES);
+    ledcSetup(PWM_MOTOR1_CHANNEL, PWM_MOTOR_FREQ, PWM_MOTOR_RES);
+
 }
 
 void Wheels::move(char moteur, char vitesse_pourcent)
 {
     char vitesse_255 = map(vitesse_pourcent, 0, 100, PWM_MOTOR_MIN_VALUE_DUTYCYCLE, 255);
 
-    // Enable des moteurs
-    if (moteur == RIGHT_WHEELS_BACKWARD || moteur == RIGHT_WHEELS_FORWARD) digitalWrite(RIGHT_WHEELS_EN, HIGH);
+    switch (moteur)
+    {
     
-    else if (moteur == LEFT_WHEELS_BACKWARD || moteur == LEFT_WHEELS_FORWARD) digitalWrite(LEFT_WHEELS_EN, HIGH);
+    case ALL_WHEELS_FORWARD:
+        attach_detach_PWM(RIGHT_WHEELS_FORWARD, vitesse_255, 2);
+        attach_detach_PWM(LEFT_WHEELS_FORWARD, vitesse_255, 2);
+        break;
     
-    else
-    {
-        digitalWrite(RIGHT_WHEELS_EN, HIGH);
-        digitalWrite(LEFT_WHEELS_EN, HIGH);
+    case ALL_WHEELS_BACKWARD: 
+        attach_detach_PWM(RIGHT_WHEELS_BACKWARD, vitesse_255, 2);
+        attach_detach_PWM(LEFT_WHEELS_BACKWARD, vitesse_255, 2);
+        break;
+
+    case RIGHT_WHEELS_BACKWARD:
+    case RIGHT_WHEELS_FORWARD:
+    case LEFT_WHEELS_FORWARD:
+    case LEFT_WHEELS_BACKWARD:
+        attach_detach_PWM(moteur, vitesse_255, 1);
+        break;
+
+
+
+    default:
+        break;
     }
-
-    //Mise en marche des moteurs
-    if (moteur == ALL_WHEELS_FORWARD)
-    {
-        /*
-        digitalWrite(RIGHT_WHEELS_FORWARD, HIGH);
-        digitalWrite(LEFT_WHEELS_FORWARD, HIGH);
-        */
-       ledcAttachPin(RIGHT_WHEELS_FORWARD, PWM_MOTOR1_CHANNEL);
-       ledcAttachPin(LEFT_WHEELS_FORWARD, PWM_MOTOR1_CHANNEL);
-    }
-
-    else if (moteur == ALL_WHEELS_BACKWARD)
-    {
-        /*
-        digitalWrite(RIGHT_WHEELS_BACKWARD, HIGH);
-        digitalWrite(LEFT_WHEELS_BACKWARD, HIGH);
-        */
-       ledcAttachPin(RIGHT_WHEELS_BACKWARD, PWM_MOTOR1_CHANNEL);
-       ledcAttachPin(LEFT_WHEELS_BACKWARD, PWM_MOTOR1_CHANNEL);
-    }
-
-    else
-    {
-        ledcAttachPin(moteur, PWM_MOTOR1_CHANNEL);
-    }
-
-        ledcSetup(PWM_MOTOR1_CHANNEL, PWM_MOTOR_FREQ, PWM_MOTOR_RES);
-        ledcWrite(PWM_MOTOR1_CHANNEL, vitesse_255);
-    
-
 }
 
 void Wheels::stop_move(char moteur)
 {
-    // Disable des moteurs
-    if (moteur = RIGHT_WHEELS_BACKWARD || moteur == RIGHT_WHEELS_FORWARD) ledcWrite(PWM_MOTOR1_CHANNEL, 0);
-    else if (moteur == LEFT_WHEELS_BACKWARD || moteur == LEFT_WHEELS_FORWARD) digitalWrite(LEFT_WHEELS_EN, LOW);
-    else
+    char vitesse_255 = 0;
+    switch (moteur)
     {
-        digitalWrite(RIGHT_WHEELS_EN, LOW);
-        digitalWrite(LEFT_WHEELS_EN, LOW);
+    case ALL_WHEELS_FORWARD:
+        attach_detach_PWM(RIGHT_WHEELS_FORWARD, vitesse_255, 0);
+        attach_detach_PWM(LEFT_WHEELS_FORWARD, vitesse_255, 0);
+        break;
+    
+    case ALL_WHEELS_BACKWARD: 
+        attach_detach_PWM(RIGHT_WHEELS_BACKWARD, vitesse_255, 0);
+        attach_detach_PWM(LEFT_WHEELS_BACKWARD, vitesse_255, 0);
+        break;
+
+    case RIGHT_WHEELS_FORWARD:
+    case RIGHT_WHEELS_BACKWARD:
+    case LEFT_WHEELS_FORWARD:
+    case LEFT_WHEELS_BACKWARD:
+        attach_detach_PWM(moteur, vitesse_255, 0);
+        break;
+
+    default:
+        break;
+    }
+}
+
+void attach_detach_PWM(char moteur, char vitesse_255, char attach)
+{
+    /*
+    Valeur possible pour attach : 
+        0 : stop_move
+        1 : move seulement 1 moteur
+        2 : move les 2 moteurs
+    */
+    char attach_pin = moteur;
+    char attach_chanel;
+    char detach_pin;
+    char enable_pin;
+
+    switch (moteur)
+    {
+    case LEFT_WHEELS_FORWARD:
+        enable_pin = LEFT_WHEELS_EN;
+        detach_pin = LEFT_WHEELS_BACKWARD;
+        attach_chanel = PWM_MOTOR1_CHANNEL;
+        break;
+
+    case LEFT_WHEELS_BACKWARD:
+        enable_pin = LEFT_WHEELS_EN;
+        detach_pin = LEFT_WHEELS_FORWARD;
+        attach_chanel = PWM_MOTOR1_CHANNEL;
+        break;
+    
+    case RIGHT_WHEELS_FORWARD:
+        enable_pin = RIGHT_WHEELS_EN;
+        detach_pin = RIGHT_WHEELS_BACKWARD;
+        attach_chanel = PWM_MOTOR2_CHANNEL;
+        break;
+    
+    case RIGHT_WHEELS_BACKWARD:
+        enable_pin = RIGHT_WHEELS_EN;
+        detach_pin = RIGHT_WHEELS_FORWARD;
+        attach_chanel = PWM_MOTOR2_CHANNEL;
+        break;
+
+    default:
+        break;
     }
 
-    //Mise en marche des moteurs
-    if(moteur == ALL_WHEELS_FORWARD)
+    if (attach !=2)
     {
-        digitalWrite(RIGHT_WHEELS_FORWARD, LOW);
-        digitalWrite(LEFT_WHEELS_FORWARD, LOW);
+    digitalWrite(enable_pin, HIGH);
+
+    if(attach == 1) ledcAttachPin(moteur, attach_chanel);
+    else digitalWrite(attach_pin, LOW);
+
+    ledcDetachPin(detach_pin);
+    digitalWrite(detach_pin, LOW);
+    ledcWrite(attach_chanel, vitesse_255);
     }
-    else if (moteur == ALL_WHEELS_BACKWARD)
+    else 
     {
-        digitalWrite(RIGHT_WHEELS_BACKWARD, LOW);
-        digitalWrite(LEFT_WHEELS_BACKWARD, LOW);
+        ledcAttachPin(moteur, PWM_MOTOR1_CHANNEL);
+        ledcWrite(PWM_MOTOR1_CHANNEL, vitesse_255);
+
     }
+
 }

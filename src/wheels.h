@@ -14,6 +14,7 @@
 #define ALL_WHEELS_FORWARD      1
 #define ALL_WHEELS_BACKWARD     2
 #define ALL_WHEELS_STOP         3
+#define ALL_WHEELS_DETACH       6
 
 #define PWM_MOTOR1_CHANNEL  0
 #define PWM_MOTOR2_CHANNEL  1
@@ -32,5 +33,7 @@ class Wheels
         void stop_move(char moteur);
         
 };
+
+void attach_detach_PWM(char moteur, char vitesse, char attach);
 
 #endif
