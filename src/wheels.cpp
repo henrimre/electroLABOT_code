@@ -75,8 +75,16 @@ void Wheels::stop_move(char moteur)
     }
 }
 
+void Wheels::run_elabot_run(char moteur, char vitesse_100, int retard)
+{
+    move(moteur, vitesse_100);
+    delay(retard);
+    stop_move(moteur);
+}
+
 void attach_detach_PWM(char moteur, char vitesse_255, char attach)
 {
+    Serial.println("attach_detach_pwm");
     /*
     Valeur possible pour attach : 
         0 : stop_move
@@ -88,46 +96,50 @@ void attach_detach_PWM(char moteur, char vitesse_255, char attach)
     char detach_pin;
     char enable_pin;
 
+    switch (moteur)
+    {
+    case LEFT_WHEELS_FORWARD:
+        Serial.println("switch left wheels forward");
+        enable_pin = LEFT_WHEELS_EN;
+        detach_pin = LEFT_WHEELS_BACKWARD;
+        attach_chanel = PWM_MOTOR1_CHANNEL;
+        break;
 
-        Serial.println("attach different de 2");
-        switch (moteur)
-        {
-        case LEFT_WHEELS_FORWARD:
-            enable_pin = LEFT_WHEELS_EN;
-            detach_pin = LEFT_WHEELS_BACKWARD;
-            attach_chanel = PWM_MOTOR1_CHANNEL;
-            break;
+    case LEFT_WHEELS_BACKWARD:
+        Serial.println("switch left wheels backward");
+        enable_pin = LEFT_WHEELS_EN;
+        detach_pin = LEFT_WHEELS_FORWARD;
+        attach_chanel = PWM_MOTOR1_CHANNEL;
+        break;
+    
+    case RIGHT_WHEELS_FORWARD:
+    Serial.println("switch right wheels forward");
+        enable_pin = RIGHT_WHEELS_EN;
+        detach_pin = RIGHT_WHEELS_BACKWARD;
+        attach_chanel = PWM_MOTOR2_CHANNEL;
+        break;
+    
+    case RIGHT_WHEELS_BACKWARD:
+        Serial.println("switch right wheel backward");
+        enable_pin = RIGHT_WHEELS_EN;
+        detach_pin = RIGHT_WHEELS_FORWARD;
+        attach_chanel = PWM_MOTOR2_CHANNEL;
+        break;
 
-        case LEFT_WHEELS_BACKWARD:
-            enable_pin = LEFT_WHEELS_EN;
-            detach_pin = LEFT_WHEELS_FORWARD;
-            attach_chanel = PWM_MOTOR1_CHANNEL;
-            break;
-        
-        case RIGHT_WHEELS_FORWARD:
-            enable_pin = RIGHT_WHEELS_EN;
-            detach_pin = RIGHT_WHEELS_BACKWARD;
-            attach_chanel = PWM_MOTOR2_CHANNEL;
-            break;
-        
-        case RIGHT_WHEELS_BACKWARD:
-            enable_pin = RIGHT_WHEELS_EN;
-            detach_pin = RIGHT_WHEELS_FORWARD;
-            attach_chanel = PWM_MOTOR2_CHANNEL;
-            break;
-
-        default:
-            break;
-        }
+    default:
+        Serial.println("switch default");
+        break;
+    }
 
     if(attach!=2)
     {
     if(attach == 1) 
-    {
+    {   Serial.println("one wheel move");
         ledcAttachPin(moteur, attach_chanel);
         digitalWrite(enable_pin, HIGH);
     }
     else {
+        Serial.println("wheel stop");
         digitalWrite(attach_pin, LOW);
         digitalWrite(enable_pin, LOW);
     }
@@ -139,8 +151,8 @@ void attach_detach_PWM(char moteur, char vitesse_255, char attach)
 
     else 
     {
+        Serial.println("two wheels move");
         digitalWrite(enable_pin, HIGH);
-        Serial.println("attach == 2");
         ledcAttachPin(moteur, PWM_MOTOR1_CHANNEL);
         ledcWrite(PWM_MOTOR1_CHANNEL, vitesse_255);
     }

@@ -31,7 +31,7 @@ class Wheels
         Wheels();
         void move(char moteur, char vitesse_100);
         void stop_move(char moteur);
-        
+        void run_elabot_run (char moteur, char vitesse_100, int delay);
 };
 
 void attach_detach_PWM(char moteur, char vitesse, char attach);

@@ -24,16 +24,20 @@ Serial.println();
 Serial.println();
 Serial.println();
 Serial.println();
-
-billy.move(ALL_WHEELS_FORWARD, 40);
 }
 
 void loop() 
 {
-  
-  delay(3000);
-  billy.stop_move(ALL_WHEELS_FORWARD);
-  delay(3000);
-  billy.move(ALL_WHEELS_FORWARD, 40);
-
+  Serial.println();
+  Serial.println();
+  Serial.println();
+  Serial.println();
+  Serial.println("Au début");
+  billy.run_elabot_run(ALL_WHEELS_FORWARD, 40, 3000);
+  billy.move(RIGHT_WHEELS_FORWARD, 20);
+  billy.move(LEFT_WHEELS_BACKWARD, 20);
+  delay(1500);
+  billy.stop_move(RIGHT_WHEELS_FORWARD);
+  billy.stop_move(LEFT_WHEELS_BACKWARD);
+  billy.run_elabot_run(ALL_WHEELS_BACKWARD, 40, 3000);
 }
