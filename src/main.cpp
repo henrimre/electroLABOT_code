@@ -17,9 +17,14 @@ void setup()
   billy.rgb_set_color(LED_all, 30, 0, 15);
 
 /*
-  billy.move(RIGHT_WHEELS_FORWARD, 50);
+  billy.move(RIGHT_WHEELS_FORWARD, 10);
   billy.move(LEFT_WHEELS_FORWARD, 80);
 */
+Serial.println();
+Serial.println();
+Serial.println();
+Serial.println();
+
 billy.move(ALL_WHEELS_BACKWARD, 10);
 }
 
