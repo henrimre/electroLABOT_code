@@ -2,8 +2,8 @@
 #define ELABOT
 
 #include <led.h>
-
-class Elabot : public Led
+#include <wheels.h>
+class Elabot : public Led, public Wheels
 {
     private : 
 
