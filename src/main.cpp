@@ -5,6 +5,8 @@
 Servo servo2;
 
 Elabot billy;
+int dutycycle = 0;
+
 
 void setup() 
 {
@@ -15,6 +17,7 @@ void setup()
   //billy.led_on(LED_BUILTIN);
   
   billy.rgb_set_color(LED_all, 30, 0, 15);
+<<<<<<< HEAD
   //billy.move_head(10);
 
   //servo2.attach(pin_servo);
@@ -22,9 +25,35 @@ void setup()
   //servo.attached(pin_servo);
   //billy.move_head(170);
   
+=======
+
+/*
+  billy.move(RIGHT_WHEELS_FORWARD, 10);
+  billy.move(LEFT_WHEELS_FORWARD, 80);
+*/
+Serial.println();
+Serial.println();
+Serial.println();
+Serial.println();
+>>>>>>> wheels
 }
 
 void loop() 
 {
+<<<<<<< HEAD
   
+=======
+  Serial.println();
+  Serial.println();
+  Serial.println();
+  Serial.println();
+  Serial.println("Au début");
+  billy.run_elabot_run(ALL_WHEELS_FORWARD, 40, 3000);
+  billy.move(RIGHT_WHEELS_FORWARD, 20);
+  billy.move(LEFT_WHEELS_BACKWARD, 20);
+  delay(1500);
+  billy.stop_move(RIGHT_WHEELS_FORWARD);
+  billy.stop_move(LEFT_WHEELS_BACKWARD);
+  billy.run_elabot_run(ALL_WHEELS_BACKWARD, 40, 3000);
+>>>>>>> wheels
 }
