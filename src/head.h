@@ -9,6 +9,8 @@
 #define LEFT_FREE       1
 #define RIGHT_FREE      2
 #define NO_FREE         3
+#define KEEP_GOING      0
+#define STOP            1
 
 class Head
 {
