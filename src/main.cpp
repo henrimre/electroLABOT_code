@@ -27,16 +27,4 @@ void setup()
 void loop() 
 {
   
-  Serial.println("billy.look_around");
-  billy.look_around();
-
-  //billy.move_head(90);
-  //Serial.print("delay");
-  //delay(2000);
-  //Serial.print("Terminal série : test\r\n");
-
-  //billy.rgb_blink(500);
-
- //Serial.println(billy.look());
- // delay(1000);
 }
