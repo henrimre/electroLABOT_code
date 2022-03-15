@@ -25,7 +25,7 @@ void Head::move_head(int degrees)
 
 char Head::look_around()
 {
-    if (attach = false)
+    if (attach == false)
     {
         servo.attach(pin_servo);
         attach = true;
@@ -43,7 +43,7 @@ char Head::look_around()
     Serial.println(distance_left_side);
     Serial.println("\r\n move_head(10)");
     */
-    move_head(10); 
+    move_head(5); 
     while(servo.read() > 11);
     delay(1000);
     distance_right_side = look();
