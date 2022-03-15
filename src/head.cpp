@@ -95,5 +95,10 @@ double Head::look()
     return distance < 500 ? distance : 0;
 }
 
+char Head::look_where_you_step()
+{
+    if (look()> 10) return KEEP_GOING;
+    else return STOP;
+}
 
 

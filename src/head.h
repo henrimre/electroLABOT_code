@@ -19,6 +19,7 @@ class Head
         void move_head(int degres);
         double look();
         char look_around();
+        char look_where_you_step(); //regarde où tu mets les pieds ! 
 
 };
 
