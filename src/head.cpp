@@ -1,25 +1,62 @@
 #include <head.h>
 
 Servo servo;
+bool attach = false; 
 
 Head::Head()
 {
+    
+    //Serial.println("attach servo");
+    digitalWrite(LED_BUILTIN, HIGH);
     servo.attach(pin_servo);
+    //le attach ne se fait pas pourtant le constructeur est réalisé ...
 
 }
 
 void Head::move_head(int degrees)
-{
+{   
+    if (attach == false)
+    {
+        servo.attach(pin_servo);
+        attach = true;
+    }
     servo.write(degrees);
 }
 
-void Head::look_around()
+char Head::look_around()
 {
+    if (attach = false)
+    {
+        servo.attach(pin_servo);
+        attach = true;
+    }
     double distance_left_side = 0;
     double distance_right_side = 0;
 
-    move_head(0);
+    //Serial.println("\r\n move_head(180)");
+    move_head(180);
+    while(servo.read() < 179);
+    delay(1000);
+    distance_left_side = look();
+    /*
+    Serial.print("distance_left_side \t ");
+    Serial.println(distance_left_side);
+    Serial.println("\r\n move_head(10)");
+    */
+    move_head(10); 
+    while(servo.read() > 11);
+    delay(1000);
+    distance_right_side = look();
+    /*
+    Serial.print("distance_right_side \t ");
+    Serial.println(distance_right_side);
+    */
+
+    if (distance_left_side < 8 && distance_right_side < 8) return NO_FREE;
     
+    else if (distance_left_side > distance_right_side) return LEFT_FREE;
+
+    else return RIGHT_FREE;    
 }
 
 double Head::look()
@@ -55,7 +92,7 @@ double Head::look()
 
     distance = fabs(((stop_time - 40 - start_time) / 58.31));
 
-    return distance < 500 ? distance : 501;
+    return distance < 500 ? distance : 0;
 }
 
 
