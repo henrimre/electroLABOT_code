@@ -2,7 +2,7 @@
 #define ELABOT
 
 #include <led.h>
-#include <servo_moteur.h>
+#include <head.h>
 
 class Elabot : public Led, public Head
 {

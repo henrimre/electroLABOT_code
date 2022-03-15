@@ -14,6 +14,7 @@ void setup()
   billy.led_on(LED_BUILTIN);
   
   billy.rgb_set_color(LED_all, 30, 0, 15);
+  //billy.move_head(10);
 
 }
 
@@ -24,4 +25,7 @@ void loop()
   //Serial.print("Terminal série : test\r\n");
 
   //billy.rgb_blink(500);
+
+ //Serial.println(billy.look());
+ // delay(1000);
 }
