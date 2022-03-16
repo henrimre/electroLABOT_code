@@ -27,7 +27,7 @@ void loop()
   billy.move(ALL_WHEELS_BACKWARD, 20);
   //billy.self_driving_ultrason(30, 15);
   delay(1000);
-  billy.stop_move_2(ALL_WHEELS_STOP);
+  billy.stop_move(ALL_WHEELS_STOP);
   delay(1000);
 
   Serial.println();
@@ -36,7 +36,7 @@ void loop()
 
   billy.move(ALL_WHEELS_FORWARD, 20);
   delay(1000);
-  billy.stop_move_2(ALL_WHEELS_STOP);
+  billy.stop_move(ALL_WHEELS_STOP);
   delay(1000);
 
   /*
