@@ -21,33 +21,6 @@ void setup()
 
 void loop() 
 {
-  Serial.println();
-  Serial.println();
-  Serial.println("ALL WHEELS FORWARD");
-  billy.move(ALL_WHEELS_BACKWARD, 20);
-  //billy.self_driving_ultrason(30, 15);
-  delay(1000);
-  billy.stop_move(ALL_WHEELS_STOP);
-  delay(1000);
+  billy.self_driving_ultrason(30, 25);
 
-  Serial.println();
-  Serial.println();
-  Serial.println("ALL WHEELS BACKWARD");
-
-  billy.move(ALL_WHEELS_FORWARD, 20);
-  delay(1000);
-  billy.stop_move(ALL_WHEELS_STOP);
-  delay(1000);
-
-  /*
-  time2 = millis();
-  if(time2-time1 > 500){
-    billy.self_driving_ultrason(30, 15);
-    time1 = time2;
-  }
-
-  digitalWrite(LED_BUILTIN, digitalRead(LEFT_WHEELS_EN));
-  billy.look_around();
-  delay(1000);
-*/
 }
