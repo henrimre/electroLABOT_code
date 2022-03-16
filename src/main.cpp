@@ -21,6 +21,16 @@ void setup()
 
 void loop() 
 {
-  billy.self_driving_ultrason(30, 25);
+  //billy.self_driving_ultrason(30, 25);
+  billy.self_driving_IR(80);
+  delay(200);
+  //billy.stop_move(LEFT_WHEELS_STOP);
+  //delay(1000);
+  //billy.move(LEFT_WHEELS_FORWARD, 80);
+  //delay(1000);
+  //billy.stop_move(LEFT_WHEELS_STOP);
+  //delay(1000);
+  //billy.move(LEFT_WHEELS_FORWARD, 10);
+  //delay(1000);
 
 }

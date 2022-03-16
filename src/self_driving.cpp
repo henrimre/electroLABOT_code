@@ -2,8 +2,14 @@
 
 double last_look;
 
-void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distance)
-{
+ Self_driving::Self_driving()
+ {
+     pinMode(IR_SENSOR_1, INPUT);
+     pinMode(IR_SENSOR_2, INPUT);
+     digitalWrite(LED_BUILTIN, HIGH);
+ }
+
+void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distance){
     Serial.println("Self_driving");
         
     if(look_where_you_step(stop_distance) == KEEP_GOING)
@@ -52,5 +58,41 @@ void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distan
         }
         
     }
+
+}
+
+void Self_driving::self_driving_IR(char vitesse_pourcent)
+{
+    ir_sens_1_value = analogRead(IR_SENSOR_1);
+    //ir_sens_2_value = analogRead(IR_SENSOR_2);
+    Serial.println(ir_sens_1_value);
+
+    //faire une moyenne sur les dernières valeurs
+
+    if (ir_sens_2_value > IR_threshold)
+    {
+        //aller à droite 
+        Serial.println("Aller à droite");
+        move(LEFT_WHEELS_FORWARD, vitesse_pourcent/2);
+        delay(200);
+
+    }
+
+    else if (ir_sens_1_value > IR_threshold)
+    {
+        //aller à gauche 
+        Serial.println("Aller à gauche");
+        move(RIGHT_WHEELS_FORWARD, vitesse_pourcent/2);
+        delay(500);
+    }
+    else 
+    {
+        move(RIGHT_WHEELS_FORWARD, vitesse_pourcent);
+        move(LEFT_WHEELS_FORWARD, vitesse_pourcent);
+    }
+
+    //couleur claire : petite valeur
+    //couleur foncé  : grande valeur
+
 
 }
