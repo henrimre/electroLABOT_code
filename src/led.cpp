@@ -26,6 +26,12 @@ void Led::led_on(int pin_led)
     digitalWrite(pin_led, HIGH);
 }
 
+void Led::led_rainbow(int hue)
+{
+    fill_rainbow(leds, NUM_LEDS, 0, hue);
+    FastLED.show();
+}
+
 void Led::rgb_blink(unsigned long blink_time)
 {
     current_millis = millis();
