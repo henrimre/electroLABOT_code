@@ -64,8 +64,12 @@ void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distan
 void Self_driving::self_driving_IR(char vitesse_pourcent)
 {
     ir_sens_1_value = analogRead(IR_SENSOR_1);
-    //ir_sens_2_value = analogRead(IR_SENSOR_2);
-    Serial.println(ir_sens_1_value);
+    ir_sens_2_value = analogRead(IR_SENSOR_2);
+    Serial.print("ir_sens_1 \t \t ir_sens_2 \n");
+    Serial.print(ir_sens_1_value);
+    Serial.print("\t \t");
+    Serial.print(ir_sens_2_value);
+    Serial.println();
 
     //faire une moyenne sur les dernières valeurs
 
