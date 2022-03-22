@@ -23,7 +23,7 @@
 #define PWM_MOTOR_FREQ      3000
 #define PWM_MOTOR_RES       8
 
-#define PWM_MOTOR_MIN_VALUE_DUTYCYCLE   85
+#define PWM_MOTOR_MIN_VALUE_DUTYCYCLE   50
 
 class Wheels
 {

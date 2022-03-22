@@ -1,6 +1,8 @@
 #include <self_driving.h>
 
 double last_look;
+//int vect_ir[10];
+
 
  Self_driving::Self_driving()
  {
@@ -63,22 +65,40 @@ void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distan
 
 void Self_driving::self_driving_IR(char vitesse_pourcent)
 {
-    ir_sens_1_value = analogRead(IR_SENSOR_1);
-    ir_sens_2_value = analogRead(IR_SENSOR_2);
+    ir_sens_1_value = analogRead(IR_SENSOR_1); //sens 1 doit être dans la bande noire
+    ir_sens_2_value = analogRead(IR_SENSOR_2); //sens 2 doit être dans la bande claire
+    
+    /*
     Serial.print("ir_sens_1 \t \t ir_sens_2 \n");
     Serial.print(ir_sens_1_value);
     Serial.print("\t \t");
     Serial.print(ir_sens_2_value);
     Serial.println();
-
+    */
     //faire une moyenne sur les dernières valeurs
 
+    if(ir_sens_1_value < IR_threshold && ir_sens_2_value < IR_threshold)
+    {
+        //Aller vers la droite
+        
+        //move(RIGHT_WHEELS_FORWARD, 1);
+        stop_move(RIGHT_WHEELS_STOP);
+    }
+
+    else if (ir_sens_2_value > IR_threshold && ir_sens_1_value > IR_threshold)
+    {
+        //Aller vers la gauche
+        //move(LEFT_WHEELS_FORWARD, 1);
+        stop_move(LEFT_WHEELS_STOP);
+    }
+
+/*
     if (ir_sens_2_value > IR_threshold)
     {
         //aller à droite 
         Serial.println("Aller à droite");
-        move(LEFT_WHEELS_FORWARD, vitesse_pourcent/2);
-        delay(200);
+        move(LEFT_WHEELS_FORWARD, 1);
+        //delay(200);
 
     }
 
@@ -86,9 +106,10 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
     {
         //aller à gauche 
         Serial.println("Aller à gauche");
-        move(RIGHT_WHEELS_FORWARD, vitesse_pourcent/2);
-        delay(500);
+        move(RIGHT_WHEELS_FORWARD, 1);
+        //delay(200);
     }
+    */
     else 
     {
         move(RIGHT_WHEELS_FORWARD, vitesse_pourcent);
@@ -100,3 +121,5 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
 
 
 }
+
+

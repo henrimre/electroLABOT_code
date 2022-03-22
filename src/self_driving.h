@@ -19,4 +19,5 @@ class Self_driving : public Wheels, public Head
         void self_driving_IR(char);
 };
 
+void average_IR(int[]);
 #endif
