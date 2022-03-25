@@ -5,9 +5,8 @@ bool attach = false;
 
 Head::Head()
 {
-    
     //Serial.println("attach servo");
-    digitalWrite(LED_BUILTIN, HIGH);
+    //digitalWrite(LED_BUILTIN, HIGH);
     servo.attach(pin_servo);
     //le attach ne se fait pas pourtant le constructeur est réalisé ...
 
@@ -92,11 +91,13 @@ double Head::look()
 
     distance = fabs(((stop_time - 40 - start_time) / 58.31));
 
-    return distance < 500 ? distance : 0;
+    return distance < 500 ? distance : 501;
 }
 
-char Head::look_where_you_step()
-{
-    if (look()> 10) return KEEP_GOING;
+char Head::look_where_you_step(char stop_distance)
+{   
+    if (look()> stop_distance) return KEEP_GOING;
     else return STOP;
+
+    return PROBLEM;
 }

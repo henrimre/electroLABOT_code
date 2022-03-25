@@ -7,17 +7,19 @@ Servo servo2;
 Elabot billy;
 int dutycycle = 0;
 
+unsigned long time1, time2;
+
 
 void setup() 
 {
-  Serial.begin(115200);
+  Serial.begin(115200);  
   billy.rgb_set_color(LED_all, 30, 0, 15);
+
+  billy.move_head(90);
+
 }
 
 void loop() 
 {
-  billy.move(30,-30);
-  delay(2000);
-  billy.move(-30,30);
-  delay(2000);
+  billy.self_driving_IR(10);
 }

@@ -11,17 +11,17 @@
 #define NO_FREE         3
 #define KEEP_GOING      0
 #define STOP            1
+#define PROBLEM         3
 
 class Head
 {
     private : 
-
     public : 
         Head();
-        void move_head(int degres);
+        void move_head(int);
         double look();
         char look_around();
-        char look_where_you_step(); //regarde où tu mets les pieds ! 
+        char look_where_you_step(char); //regarde où tu mets les pieds ! 
 
 };
 
