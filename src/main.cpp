@@ -22,6 +22,4 @@ void setup()
 void loop() 
 {
   billy.self_driving_IR(10);
-  //delay(400);
-  //billy.move(RIGHT_WHEELS_FORWARD,10);
 }
