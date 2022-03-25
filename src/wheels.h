@@ -28,11 +28,12 @@
 class Wheels
 {
     private :
-        int previous_left_wheels_speed = 0;
-        int previous_right_wheels_speed = 0;
+
     public : 
         Wheels();
-        void move(int roue_droite, int roue_gauche);
+        void move(char moteur, char vitesse_100);
+        void stop_move(char moteur);
+        void run_elabot_run (char moteur, char vitesse_100, int delay);
 };
 
 void attach_detach_PWM(char moteur, char vitesse, char attach);
