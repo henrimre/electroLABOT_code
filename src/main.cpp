@@ -10,7 +10,7 @@ int dutycycle = 0;
 
 void setup() 
 {
-  //Serial.begin(115200);
+  Serial.begin(115200);
   billy.rgb_set_color(LED_all, 30, 0, 15);
 }
 
