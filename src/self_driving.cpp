@@ -83,6 +83,7 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
         
         //move(RIGHT_WHEELS_FORWARD, 1);
         stop_move(RIGHT_WHEELS_STOP);
+        //Serial.println("Right wheels stop");
     }
 
     else if (ir_sens_2_value > IR_threshold && ir_sens_1_value > IR_threshold)
@@ -90,6 +91,7 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
         //Aller vers la gauche
         //move(LEFT_WHEELS_FORWARD, 1);
         stop_move(LEFT_WHEELS_STOP);
+        //Serial.println("Left wheels stop");
     }
 
 /*
@@ -114,6 +116,7 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
     {
         move(RIGHT_WHEELS_FORWARD, vitesse_pourcent);
         move(LEFT_WHEELS_FORWARD, vitesse_pourcent);
+        //Serial.println("All wheels forward");
     }
 
     //couleur claire : petite valeur
