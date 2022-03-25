@@ -30,7 +30,7 @@ void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distan
         switch (look_around())
         {
         case LEFT_FREE:
-            Serial.println("\t \t LEFT_FREE");
+            //Serial.println("\t \t LEFT_FREE");
             move(LEFT_WHEELS_BACKWARD, vitesse_pourcent);
             move(RIGHT_WHEELS_FORWARD, vitesse_pourcent);
             delay(1000);
@@ -40,7 +40,7 @@ void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distan
             break;
         
         case RIGHT_FREE:
-            Serial.println("\t \t RIGHT_FREE");
+           // Serial.println("\t \t RIGHT_FREE");
             move(LEFT_WHEELS_FORWARD, vitesse_pourcent);
             move(RIGHT_WHEELS_BACKWARD, vitesse_pourcent);
             delay(1000);
@@ -75,15 +75,12 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
     Serial.print(ir_sens_2_value);
     Serial.println();
     */
-    //faire une moyenne sur les dernières valeurs
+    // update faire une moyenne sur les dernières valeurs
 
     if(ir_sens_1_value < IR_threshold && ir_sens_2_value < IR_threshold)
     {
         //Aller vers la droite
-        
-        //move(RIGHT_WHEELS_FORWARD, 1);
         stop_move(RIGHT_WHEELS_STOP);
-        //Serial.println("Right wheels stop");
     }
 
     else if (ir_sens_2_value > IR_threshold && ir_sens_1_value > IR_threshold)
@@ -94,24 +91,6 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
         //Serial.println("Left wheels stop");
     }
 
-/*
-    if (ir_sens_2_value > IR_threshold)
-    {
-        //aller à droite 
-        Serial.println("Aller à droite");
-        move(LEFT_WHEELS_FORWARD, 1);
-        //delay(200);
-
-    }
-
-    else if (ir_sens_1_value > IR_threshold)
-    {
-        //aller à gauche 
-        Serial.println("Aller à gauche");
-        move(RIGHT_WHEELS_FORWARD, 1);
-        //delay(200);
-    }
-    */
     else 
     {
         move(RIGHT_WHEELS_FORWARD, vitesse_pourcent);
