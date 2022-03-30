@@ -7,7 +7,6 @@ void setup()
 {
   Serial.begin(115200);  
   billy.rgb_set_color(LED_all, 0, 30, 0);
-
 }
 
 void loop() 
