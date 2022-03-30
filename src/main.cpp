@@ -5,7 +5,6 @@
 Servo servo2;
 
 Elabot billy;
-int dutycycle = 0;
 
 
 void setup() 
@@ -16,8 +15,5 @@ void setup()
 
 void loop() 
 {
-  billy.move(30,-30);
-  delay(2000);
-  billy.move(-30,30);
-  delay(2000);
+  billy.move(1,1);
 }
