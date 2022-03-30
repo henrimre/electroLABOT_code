@@ -43,8 +43,7 @@ void Led::rgb_blink(unsigned long blink_time)
 
         FastLED.show();
         
-        if(led_state == true) led_state = false;
-        else led_state = true;
+        led_state!=led_state;
     }
     
 }

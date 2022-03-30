@@ -5,7 +5,6 @@
 Servo servo2;
 
 Elabot billy;
-int dutycycle = 0;
 
 unsigned long time1, time2;
 
@@ -21,6 +20,5 @@ void setup()
 
 void loop() 
 {
-  billy.self_driving_IR(10);
-  //billy.move(15,15);
+  billy.move(1,1);
 }
