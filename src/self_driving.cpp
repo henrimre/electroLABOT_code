@@ -18,40 +18,37 @@ void Self_driving::self_driving_ultrason(char vitesse_pourcent, char stop_distan
     {
         //Serial.println("\t KEEP GOING");
         move_head(90);
-        move(ALL_WHEELS_FORWARD, vitesse_pourcent);
+        move(vitesse_pourcent, vitesse_pourcent);
     }
     
     else
     {   
         //Serial.println("\t STOP");
-        stop_move(ALL_WHEELS_STOP);
+        move(0,0);
         delay(1000);
         
         switch (look_around())
         {
         case LEFT_FREE:
             //Serial.println("\t \t LEFT_FREE");
-            move(LEFT_WHEELS_BACKWARD, vitesse_pourcent);
-            move(RIGHT_WHEELS_FORWARD, vitesse_pourcent);
+            move(vitesse_pourcent, vitesse_pourcent);
             delay(1000);
-            stop_move(LEFT_WHEELS_STOP);
-            stop_move(RIGHT_WHEELS_STOP);
+            move(0,0);
             delay(1000);
             break;
         
         case RIGHT_FREE:
            // Serial.println("\t \t RIGHT_FREE");
-            move(LEFT_WHEELS_FORWARD, vitesse_pourcent);
-            move(RIGHT_WHEELS_BACKWARD, vitesse_pourcent);
+            move(vitesse_pourcent, vitesse_pourcent);
+            move(vitesse_pourcent, vitesse_pourcent);
             delay(1000);
-            stop_move(LEFT_WHEELS_STOP);
-            stop_move(RIGHT_WHEELS_STOP);
+            move(0,0);
             delay(1000);
             break;
 
         case NO_FREE:
             Serial.println("\t \t NO FREE");
-            move(ALL_WHEELS_FORWARD, vitesse_pourcent);
+            move(vitesse_pourcent, vitesse_pourcent);
             delay(2000);
             break;
         default:
@@ -80,27 +77,22 @@ void Self_driving::self_driving_IR(char vitesse_pourcent)
     if(ir_sens_1_value < IR_threshold && ir_sens_2_value < IR_threshold)
     {
         //Aller vers la droite
-        stop_move(RIGHT_WHEELS_STOP);
+        move(vitesse_pourcent, 0);
     }
 
     else if (ir_sens_2_value > IR_threshold && ir_sens_1_value > IR_threshold)
     {
         //Aller vers la gauche
-        //move(LEFT_WHEELS_FORWARD, 1);
-        stop_move(LEFT_WHEELS_STOP);
+        move(0, vitesse_pourcent);
         //Serial.println("Left wheels stop");
     }
 
     else 
     {
-        move(RIGHT_WHEELS_FORWARD, vitesse_pourcent);
-        move(LEFT_WHEELS_FORWARD, vitesse_pourcent);
+        move(vitesse_pourcent, vitesse_pourcent);
         //Serial.println("All wheels forward");
     }
-
     //couleur claire : petite valeur
     //couleur foncé  : grande valeur
-
-
 }
 
