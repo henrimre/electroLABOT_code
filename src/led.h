@@ -5,21 +5,20 @@
 #include <FastLED.h>
 
 //Nombre de LED sur l'ELABOT
-#define NUM_LEDS    4 
-#define DATA_PIN    32
-#define LED_D11     0
-#define LED_D12     1
-#define LED_D13     2
-#define LED_D14     3
-#define LED_all     4
 #define COLOR_ORDER GRB
+const int NUM_LEDS = 4;
+const int DATA_PIN = 32;
+const int LED_D11  = 0;
+const int LED_D12  = 1;
+const int LED_D13  = 2;
+const int LED_D14  = 3;
+const int LED_all  = 4;
 
 class Led
 {
     private : 
         void rgb_init();
         CRGB leds[NUM_LEDS];
-
 
     public : 
         Led();

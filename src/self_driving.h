@@ -7,7 +7,7 @@
 
 #define IR_SENSOR_1     26
 #define IR_SENSOR_2     14
-#define IR_threshold    1000
+const int IR_threshold = 1000;
 class Self_driving : public Wheels, public Head
 {
     private :
