@@ -9,7 +9,6 @@ Head::Head()
     //digitalWrite(LED_BUILTIN, HIGH);
     servo.attach(pin_servo);
     //le attach ne se fait pas pourtant le constructeur est réalisé ...
-
 }
 
 void Head::move_head(int degrees)
