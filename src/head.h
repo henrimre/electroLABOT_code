@@ -12,7 +12,6 @@ const char RIGHT_FREE = 2;
 const char NO_FREE = 3;
 const char KEEP_GOING = 0;
 const char STOP = 4;
-const char PROBLEM = 5;
 class Head
 {
     private : 

@@ -1,3 +1,4 @@
+#include <main.h>
 #ifndef WHEELS
 #define WHEELS
 
@@ -27,8 +28,8 @@ class Wheels
         const int PWM_MOTOR_RES = 8;
 
         const int PWM_MOTOR_MIN_VALUE_DUTYCYCLE = 60;
-        int previous_left_wheels_speed = 0;
-        int previous_right_wheels_speed = 0;
+        int16_t previous_left_wheels_speed = 0;
+        int16_t previous_right_wheels_speed = 0;
         const int max_val_wheels_speed = 200;
         const int start_val_right_wheels_speed = 0;
         const int start_val_left_wheels_speed = 0;
@@ -36,7 +37,7 @@ class Wheels
 
     public : 
         Wheels();
-        void move(int roue_droite, int roue_gauche);
+        void move(int16_t, int16_t);
 };
 
 void attach_detach_PWM(char moteur, char vitesse, char attach);

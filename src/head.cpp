@@ -95,8 +95,5 @@ double Head::look()
 
 char Head::look_where_you_step(char stop_distance)
 {   
-    if (look()> stop_distance) return KEEP_GOING;
-    else return STOP;
-
-    return PROBLEM;
+    return look() > stop_distance ? KEEP_GOING : STOP;
 }
